@@ -1,0 +1,38 @@
+{% extends 'portfolio/base.html' %}
+{% block title %}Skills — {{ profile.name }}{% endblock %}
+
+{% block content %}
+
+<section class="page-hero">
+  <div class="container">
+    <div class="section-label">What I Work With</div>
+    <h1 class="section-title">Technical Skills</h1>
+    <p class="section-subtitle">Tools and disciplines I use to bring ideas to life.</p>
+  </div>
+</section>
+
+<section class="section-pad">
+  <div class="container">
+    {% if skills_by_category %}
+    <div class="skills-grid">
+      {% for category, skill_list in skills_by_category.items %}
+      <div class="skill-card">
+        <h6 class="skill-card-title">{{ category }}</h6>
+        <ul class="skill-list">
+          {% for skill in skill_list %}
+          <li class="skill-list-item">{{ skill.name }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+      <div style="text-align:center;padding:4rem 0;color:var(--text3);">
+        <i class="bi bi-tools" style="font-size:3rem;"></i>
+        <p style="margin-top:1rem;">No skills added yet. Add them via the Admin panel.</p>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% endblock %}

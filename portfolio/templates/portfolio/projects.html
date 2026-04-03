@@ -1,0 +1,63 @@
+{% extends 'portfolio/base.html' %}
+{% block title %}Projects — {{ profile.name }}{% endblock %}
+
+{% block content %}
+
+<section class="page-hero">
+  <div class="container">
+    <div class="section-label">My Work</div>
+    <h1 class="section-title">Projects</h1>
+    <p class="section-subtitle">A collection of design and development work.</p>
+  </div>
+</section>
+
+<section class="section-pad">
+  <div class="container">
+    {% if projects %}
+    <div class="projects-grid">
+      {% for project in projects %}
+      <div class="project-card">
+        {% if project.image %}
+          <img src="{{ project.image.url }}" alt="{{ project.title }}" class="project-img"/>
+        {% else %}
+          <div class="project-img-placeholder">No image yet</div>
+        {% endif %}
+        <div class="project-body">
+          <h3 class="project-title">{{ project.title }}</h3>
+          <p class="project-desc">{{ project.description }}</p>
+          <div class="project-tags">
+            {% for tech in project.get_technologies_list %}
+              <span class="project-tag">{{ tech }}</span>
+            {% endfor %}
+          </div>
+          <div class="project-links">
+            {% if project.behance_link %}
+              <a href="{{ project.behance_link }}" target="_blank" class="project-link">
+                <i class="bi bi-behance"></i> Behance
+              </a>
+            {% endif %}
+            {% if project.github_link %}
+              <a href="{{ project.github_link }}" target="_blank" class="project-link">
+                <i class="bi bi-github"></i> GitHub
+              </a>
+            {% endif %}
+            {% if project.live_link %}
+              <a href="{{ project.live_link }}" target="_blank" class="project-link">
+                <i class="bi bi-box-arrow-up-right"></i> Live Demo
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+      <div style="text-align:center;padding:4rem 0;color:var(--text3);">
+        <i class="bi bi-folder2-open" style="font-size:3rem;"></i>
+        <p style="margin-top:1rem;">No projects added yet. Add them via the Admin panel.</p>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% endblock %}

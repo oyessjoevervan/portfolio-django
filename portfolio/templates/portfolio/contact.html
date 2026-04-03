@@ -1,0 +1,106 @@
+{% extends 'portfolio/base.html' %}
+{% block title %}Contact — {{ profile.name }}{% endblock %}
+
+{% block content %}
+
+<section class="page-hero">
+  <div class="container">
+    <div class="section-label">Get in Touch</div>
+    <h1 class="section-title">Contact</h1>
+    <p class="section-subtitle">Have a project in mind? Let's talk.</p>
+  </div>
+</section>
+
+<section class="section-pad">
+  <div class="container">
+    <div class="contact-grid">
+
+      <div class="contact-info">
+        <h3>Let's work<br>together.</h3>
+        <p>Whether you need a brand identity, UI design, or any creative project — feel free to reach out.</p>
+
+        {% if profile %}
+          {% if profile.email %}
+          <div class="contact-detail">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+            {{ profile.email }}
+          </div>
+          {% endif %}
+        {% endif %}
+
+        <div class="social-links" style="margin-top:2rem;">
+          {% if profile.behance %}
+            <a href="{{ profile.behance }}" target="_blank" class="social-link">
+              <i class="bi bi-behance"></i> Behance
+            </a>
+          {% endif %}
+          {% if profile.instagram %}
+            <a href="{{ profile.instagram }}" target="_blank" class="social-link">
+              <i class="bi bi-instagram"></i> Instagram
+            </a>
+          {% endif %}
+          {% if profile.linkedin %}
+            <a href="{{ profile.linkedin }}" target="_blank" class="social-link">
+              <i class="bi bi-linkedin"></i> LinkedIn
+            </a>
+          {% endif %}
+          {% if profile.facebook %}
+            <a href="{{ profile.facebook }}" target="_blank" class="social-link">
+              <i class="bi bi-facebook"></i> Facebook
+            </a>
+          {% endif %}
+          {% if profile.twitter %}
+            <a href="{{ profile.twitter }}" target="_blank" class="social-link">
+              <i class="bi bi-twitter-x"></i> Twitter
+            </a>
+          {% endif %}
+          {% if profile.youtube %}
+            <a href="{{ profile.youtube }}" target="_blank" class="social-link">
+              <i class="bi bi-youtube"></i> YouTube
+            </a>
+          {% endif %}
+          {% if profile.tiktok %}
+            <a href="{{ profile.tiktok }}" target="_blank" class="social-link">
+              <i class="bi bi-tiktok"></i> TikTok
+            </a>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="contact-form-wrap">
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+
+        <form method="post" class="contact-form">
+          {% csrf_token %}
+          <div class="form-group">
+            <label class="form-label">Name</label>
+            {{ form.name }}
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            {{ form.email }}
+          </div>
+          <div class="form-group">
+            <label class="form-label">Subject</label>
+            {{ form.subject }}
+          </div>
+          <div class="form-group">
+            <label class="form-label">Message</label>
+            {{ form.message }}
+          </div>
+          <button type="submit" class="btn btn-primary" style="align-self:flex-start;">
+            <i class="bi bi-send"></i> Send Message
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{% block title %}{{ profile.name }} — Portfolio{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'portfolio/css/style.css' %}"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css"/>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="{% url 'home' %}" class="nav-brand">
+    {% if profile %}{{ profile.name|slice:":3" }}<span>.</span>{% else %}Joe<span>.</span>{% endif %}
+  </a>
+  <ul class="nav-links">
+    <li><a href="{% url 'home' %}">Home</a></li>
+    <li><a href="{% url 'about' %}">About</a></li>
+    <li><a href="{% url 'skills' %}">Skills</a></li>
+    <li><a href="{% url 'projects' %}">Projects</a></li>
+    <li><a href="{% url 'education' %}">Education</a></li>
+    <li><a href="{% url 'contact' %}">Contact</a></li>
+  </ul>
+  <button class="nav-toggle" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+{% block content %}{% endblock %}
+
+<footer>
+  <p>&copy; {% now "Y" %} <span>{% if profile %}{{ profile.name }}{% else %}Portfolio{% endif %}</span>. All rights reserved.</p>
+</footer>
+
+<script src="{% static 'portfolio/js/main.js' %}"></script>
+{% block extra_js %}{% endblock %}
+</body>
+</html>

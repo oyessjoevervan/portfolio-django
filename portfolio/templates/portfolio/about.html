@@ -1,0 +1,93 @@
+{% extends 'portfolio/base.html' %}
+{% block title %}About — {{ profile.name }}{% endblock %}
+
+{% block content %}
+
+<section class="page-hero">
+  <div class="container">
+    <div class="section-label">Who I Am</div>
+    <h1 class="section-title">About Me</h1>
+  </div>
+</section>
+
+<section class="section-pad">
+  <div class="container">
+    {% if profile %}
+    <div class="about-grid">
+
+      <div class="about-image-col">
+        {% if profile.photo %}
+          <img src="{{ profile.photo.url }}" alt="{{ profile.name }}" class="about-photo"/>
+        {% else %}
+          <div class="about-photo-placeholder">Add photo in admin</div>
+        {% endif %}
+
+        <div class="social-links" style="margin-top:1.5rem;">
+          {% if profile.behance %}
+            <a href="{{ profile.behance }}" target="_blank" class="social-link">
+              <i class="bi bi-behance"></i> Behance
+            </a>
+          {% endif %}
+          {% if profile.instagram %}
+            <a href="{{ profile.instagram }}" target="_blank" class="social-link">
+              <i class="bi bi-instagram"></i> Instagram
+            </a>
+          {% endif %}
+          {% if profile.linkedin %}
+            <a href="{{ profile.linkedin }}" target="_blank" class="social-link">
+              <i class="bi bi-linkedin"></i> LinkedIn
+            </a>
+          {% endif %}
+          {% if profile.github %}
+            <a href="{{ profile.github }}" target="_blank" class="social-link">
+              <i class="bi bi-github"></i> GitHub
+            </a>
+          {% endif %}
+          {% if profile.facebook %}
+            <a href="{{ profile.facebook }}" target="_blank" class="social-link">
+              <i class="bi bi-facebook"></i> Facebook
+            </a>
+          {% endif %}
+          {% if profile.twitter %}
+            <a href="{{ profile.twitter }}" target="_blank" class="social-link">
+              <i class="bi bi-twitter-x"></i> Twitter
+            </a>
+          {% endif %}
+          {% if profile.youtube %}
+            <a href="{{ profile.youtube }}" target="_blank" class="social-link">
+              <i class="bi bi-youtube"></i> YouTube
+            </a>
+          {% endif %}
+          {% if profile.tiktok %}
+            <a href="{{ profile.tiktok }}" target="_blank" class="social-link">
+              <i class="bi bi-tiktok"></i> TikTok
+            </a>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="about-body">
+        <div class="section-label">Background</div>
+        <h2 class="section-title">Hello, I'm<br>{{ profile.name }}</h2>
+        <p>{{ profile.about }}</p>
+
+        <div class="about-goals">
+          <h4>Career Goals</h4>
+          <p>{{ profile.career_goals }}</p>
+        </div>
+
+        <div style="margin-top:2rem;">
+          <a href="{% url 'contact' %}" class="btn btn-primary">
+            <i class="bi bi-envelope"></i> Get in Touch
+          </a>
+        </div>
+      </div>
+
+    </div>
+    {% else %}
+      <p style="color:var(--text3);">No profile added yet. Add it via the Admin panel.</p>
+    {% endif %}
+  </div>
+</section>
+
+{% endblock %}
